@@ -186,10 +186,21 @@ Output:
 +--------------+-------+-------+
 Explanation: 
 From sale_id = 1, we can conclude that Nokia was sold for 5000 in the year 2008.
-From sale_id = 2, we can conclude that Nokia was sold for 5000 in the year 2009.
-From sale_id = 7, we can conclude that Apple was sold for 9000 in the year 2011.
+# Python Django:-
+ from .models import Sales
+ result = Sales.objects.select_related('product_id').values('product_id__product_name', 'year', 'price')
+#__________________________________________________________________________________________________________
+Write a solution to find the IDs of the users who visited without making any transactions and 
+the number of times they made these types of visits.
+Return the result table sorted in any order.
 
+ #models.py:
+ class Visits(models.Model):
+     visit_id = models.IntegerField(primary_key=True)
+     customer_id = models.IntegerField()
 
-
-
+ class Transactions(models.Model):
+     transaction_id = models.IntegerField(primary_key=True)
+     visit_id = models.ForeignKey("Visits", on_delete=models.CASCADE)
+     amount = models.IntegerField()
 
